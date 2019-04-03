@@ -67,6 +67,18 @@ function makeTree() {
 
       // Calls the makeBranches() function using sourceArticle and nodeList as parameters 
       makeBranches(sourceArticle, nodeList);
+
+      // Displays the total count of nodes 
+      document.getElementById("totalNodes").innerText = nodeCount;
+
+      // Displays the total count of element nodes 
+      document.getElementById("elemNodes").innerText = elementCount;
+
+      // Displays the total count of text nodes
+      document.getElementById("textNodes").innerText = textCount;
+
+      // Displays the total count of whitespace nodes 
+      document.getElementById("wsNodes").innerText = wsCount;
 }
 
 // Used to append node branches to the node tree diagram 
@@ -80,7 +92,75 @@ function makeBranches(treeNode, nestedList) {
       // Increases the nodeCount variable by 1 
       nodeCount++;
 
-      var liElem = document.
+      // Creates a list item HTML fragment 
+      var liElem = document.createElement("li");
+      liElem.textContent = "+--";
+
+      // Stores a span element node in the spanElem variable 
+      var spanElem = document.createElement("span");
+
+      // Appends the spanElem to the liElem node 
+      liElem.appendChild(spanElem);
+
+      // Appends the liElem node to the nestedList element node 
+      nestedList.appendChild(liElem);
+
+      // If treeNode represents an element node 
+      if (treeNode.nodeType === Node.ELEMENT_NODE) {
+            // Increases the value of the elementCount variable by 1 
+            elementCount++
+
+            // Adds the class attribute to the spanElem node 
+            spanElem.setAttribute("class", "elementNode");
+
+            // Appends a text string to the spanElem node 
+            spanElem.textContent = "<" + treeNode + ">";
+      } else { // If treeNode represents a text node 
+            // Increases the value of the textCount variable by 1 
+            textCount++
+
+            // Declares the variable "textString" equal to the value of the text node 
+            var textString = treeNode;
+
+            // If the function returns the value true, 
+            if (isWhiteSpaceNode(textString) === true) {
+                  // Increases the value of the wsCount variable by 1
+                  wsCount++
+
+                  // Changes the class attribute 
+                  spanElem.setAttribute("class", "whiteSpaceNode");
+
+                  // Appends the text string "#text" to the spanElem node 
+                  spanElem.innerText += "#text";
+            }
+
+            // If the function returns the value false, 
+            if (isWhiteSpaceNode(textString) === false) {
+                  // Changes the class attribute 
+                  spanElem.setAttribute("class", "textNode");
+
+                  console.log(textString);
+                  // Appends the value of the textString variable 
+                  spanElem.innerText += textString.value;
+            }
+
+            // If the number of child nodes of treeNode is greater than zero, 
+            // if (treeNode.childNodes.length > 0) {
+            if (treeNode.childNodes.value > 0) {
+                  // Creates a HTML fragment as an element node 
+                  var newList = document.createElement("ol");
+                  newList.innerText = "|";
+
+                  // Appends newList to the nestedList element node 
+                  nestedList.appendChild(newList);
+
+                  // Loops through the child nodes of treeNode using n 
+                  for (var n = 0; n < treeNode.childNodes.length; n++) {
+                        // For each child node, calls the makeBranches() function using n and newList as parameter values 
+                        makeBranches(n, newList);
+                  }
+            }
+      }
 }
 
 
