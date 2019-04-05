@@ -105,6 +105,7 @@ function makeBranches(treeNode, nestedList) {
 
       // If treeNode represents an element node 
       if (treeNode.nodeType === Node.ELEMENT_NODE) {
+            console.log("being run as an element node ");
             // Increases the value of the elementCount variable by 1 
             elementCount++
 
@@ -115,11 +116,12 @@ function makeBranches(treeNode, nestedList) {
             console.log(treeNode[0]);
             spanElem.textContent = "<" + treeNode + ">";
       } else { // If treeNode represents a text node 
+            console.log("being run as a text node");
             // Increases the value of the textCount variable by 1 
             textCount++
 
             // Declares the variable "textString" equal to the value of the text node 
-            var textString = treeNode;
+            var textString = treeNode.childNodes.innerHTML;
 
             // If the function returns the value true, 
             if (isWhiteSpaceNode(textString) === true) {
