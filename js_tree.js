@@ -83,11 +83,9 @@ function makeTree() {
 
 // Used to append node branches to the node tree diagram 
 function makeBranches(treeNode, nestedList) {
-      // Stores the current node from the source article 
-      // var treeNode = ;
+      // treeNode stores the current node from the source article 
 
-      // Stores the structure of the node tree displayed in the web page 
-      // var nestedList = ;
+      // nestedList stores the structure of the node tree displayed in the web page 
 
       // Increases the nodeCount variable by 1 
       nodeCount++;
@@ -114,6 +112,7 @@ function makeBranches(treeNode, nestedList) {
             spanElem.setAttribute("class", "elementNode");
 
             // Appends a text string to the spanElem node 
+            console.log(treeNode[0]);
             spanElem.textContent = "<" + treeNode + ">";
       } else { // If treeNode represents a text node 
             // Increases the value of the textCount variable by 1 
